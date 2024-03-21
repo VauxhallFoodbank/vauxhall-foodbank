@@ -1,6 +1,9 @@
 import { DatabaseError } from "@/app/errorClasses";
 import { Schema } from "@/databaseUtils";
 import { Supabase } from "@/supabaseUtils";
+import supabase from "@/supabaseClient";
+import { logError } from "@/logger/logger";
+import { Roles } from "@/app/roles";
 
 type CollectionCentre = {
     collection_centre: {
@@ -119,4 +122,19 @@ export const fetchComment = async (supabase: Supabase): Promise<string> => {
     }
 
     return data.value;
+};
+
+export const fetchUserRole = async (userId: string): Promise<Roles> => {
+    const { data, error } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("primary_key", userId)
+        .limit(1);
+
+    if (error) {
+        void logError("Error with fetch: profile for user", error);
+        throw new DatabaseError("fetch", "profile for user");
+    }
+
+    return data[0].role;
 };

@@ -5,6 +5,7 @@
 import { type Handler, serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@latest";
 import { corsHeaders, generateCorsOptionsForJsonResponse } from "../_shared/cors.ts";
+import { fetchUserRole } from "@/common/fetch";
 
 serve(async (req: Handler): Promise<Response> => {
     if (req.method === "OPTIONS") {
@@ -41,7 +42,8 @@ serve(async (req: Handler): Promise<Response> => {
         );
     }
 
-    if (user.app_metadata.role !== "admin") {
+    const userRole = await fetchUserRole(user!.id)
+    if (userRole !== "admin") {
         return new Response(
             JSON.stringify({ error: "Forbidden" }),
             generateCorsOptionsForJsonResponse(403)

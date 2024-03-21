@@ -7,6 +7,7 @@ import { getSupabaseServerComponentClient } from "@/supabaseServer";
 import { User } from "@supabase/gotrue-js";
 import { DatabaseError } from "@/app/errorClasses";
 import { Schema } from "@/databaseUtils";
+import { fetchUserRole } from "@/common/fetch";
 
 // disables caching
 export const revalidate = 0;
@@ -29,11 +30,11 @@ const getUsers = async (): Promise<UserRow[]> => {
 
     const users: User[] = data;
 
-    return users.map((user: User) => {
+    return users.map(async (user: User) => {
         return {
             id: user.id,
             email: user.email ?? "-",
-            userRole: user.app_metadata.role ?? "-",
+            userRole: (await fetchUserRole(user!.id)) ?? "-",
             createdAt: Date.parse(user.created_at),
             updatedAt: Date.parse(user.updated_at ?? ""),
         };

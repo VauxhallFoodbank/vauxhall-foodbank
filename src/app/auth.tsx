@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { DatabaseAutoType } from "@/databaseUtils";
 import { RoleUpdateContext } from "@/app/roles";
+import { fetchUserRole } from "@/common/fetch";
 
 interface Props {
     children: React.ReactNode;
@@ -66,7 +67,8 @@ export const AuthRouting: React.FC<Props> = ({ children = <></> }) => {
         const {
             data: { user },
         } = await supabase.auth.getUser();
-        const userRole = user?.app_metadata.role ?? "";
+
+        const userRole = (await fetchUserRole(user!.id)) ?? "";
         setRole(userRole);
     };
 

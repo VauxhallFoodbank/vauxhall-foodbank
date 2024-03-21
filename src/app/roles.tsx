@@ -7,7 +7,7 @@ interface Props {
     children: React.ReactNode;
 }
 
-type Roles = DatabaseEnums["role"] | "";
+export type Roles = DatabaseEnums["role"] | "";
 
 type RolesInterface = {
     [key in Roles]: string[];
