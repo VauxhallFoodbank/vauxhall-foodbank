@@ -172,7 +172,7 @@ async function generateSeed(): Promise<void> {
     await seed.parcels(
         (generate) =>
             generate(5000, {
-                packingDatetime: (ctx) =>
+                packingDate: (ctx) =>
                     getPseudoRandomDateBetween(earliestDate, latestDate, ctx.seed),
                 collectionDatetime: (ctx) =>
                     getPseudoRandomDateBetween(earliestDate, latestDate, ctx.seed),

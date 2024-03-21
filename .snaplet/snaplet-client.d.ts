@@ -53,15 +53,6 @@ type Override = {
       objects?: string;
     };
   }
-  channels?: {
-    name?: string;
-    fields?: {
-      id?: string;
-      name?: string;
-      inserted_at?: string;
-      updated_at?: string;
-    };
-  }
   clients?: {
     name?: string;
     fields?: {
@@ -351,6 +342,17 @@ type Override = {
       events?: string;
     };
   }
+  profiles?: {
+    name?: string;
+    fields?: {
+      primary_key?: string;
+      first_name?: string;
+      last_name?: string;
+      role?: string;
+      telephone_number?: string;
+      users?: string;
+    };
+  }
   refresh_tokens?: {
     name?: string;
     fields?: {
@@ -400,13 +402,6 @@ type Override = {
     name?: string;
     fields?: {
       version?: string;
-    };
-  }
-  realtime_schema_migrations?: {
-    name?: string;
-    fields?: {
-      version?: string;
-      inserted_at?: string;
     };
   }
   supabase_migrations_schema_migrations?: {
@@ -473,18 +468,6 @@ type Override = {
       sso_domains?: string;
     };
   }
-  subscription?: {
-    name?: string;
-    fields?: {
-      id?: string;
-      subscription_id?: string;
-      entity?: string;
-      filters?: string;
-      claims?: string;
-      claims_role?: string;
-      created_at?: string;
-    };
-  }
   users?: {
     name?: string;
     fields?: {
@@ -525,6 +508,7 @@ type Override = {
       identities?: string;
       mfa_factors?: string;
       sessions?: string;
+      profiles?: string;
     };
   }
   website_data?: {
@@ -572,11 +556,6 @@ export interface Fingerprint {
     updatedAt?: FingerprintDateField;
     fileSizeLimit?: FingerprintNumberField;
     objects?: FingerprintRelationField;
-  }
-  channels?: {
-    id?: FingerprintNumberField;
-    insertedAt?: FingerprintDateField;
-    updatedAt?: FingerprintDateField;
   }
   clients?: {
     families?: FingerprintRelationField;
@@ -674,6 +653,9 @@ export interface Fingerprint {
     collectionCentreByCollectionCentre?: FingerprintRelationField;
     eventsByParcelId?: FingerprintRelationField;
   }
+  profiles?: {
+    userByPrimaryKey?: FingerprintRelationField;
+  }
   refreshTokens?: {
     id?: FingerprintNumberField;
     createdAt?: FingerprintDateField;
@@ -694,10 +676,6 @@ export interface Fingerprint {
   }
   authSchemaMigrations?: {
 
-  }
-  realtimeSchemaMigrations?: {
-    version?: FingerprintNumberField;
-    insertedAt?: FingerprintDateField;
   }
   supabaseMigrationsSchemaMigrations?: {
 
@@ -728,11 +706,6 @@ export interface Fingerprint {
     samlRelayStates?: FingerprintRelationField;
     ssoDomains?: FingerprintRelationField;
   }
-  subscriptions?: {
-    id?: FingerprintNumberField;
-    claims?: FingerprintJsonField;
-    createdAt?: FingerprintDateField;
-  }
   users?: {
     emailConfirmedAt?: FingerprintDateField;
     invitedAt?: FingerprintDateField;
@@ -754,6 +727,7 @@ export interface Fingerprint {
     identities?: FingerprintRelationField;
     mfaFactors?: FingerprintRelationField;
     sessions?: FingerprintRelationField;
+    profilesByPrimaryKey?: FingerprintRelationField;
   }
   websiteData?: {
 

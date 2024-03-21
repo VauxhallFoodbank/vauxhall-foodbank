@@ -370,6 +370,38 @@ export type Database = {
           },
         ]
       }
+      profiles: {
+        Row: {
+          first_name: string | null
+          last_name: string | null
+          primary_key: string
+          role: Database["public"]["Enums"]["role"]
+          telephone_number: string | null
+        }
+        Insert: {
+          first_name?: string | null
+          last_name?: string | null
+          primary_key?: string
+          role: Database["public"]["Enums"]["role"]
+          telephone_number?: string | null
+        }
+        Update: {
+          first_name?: string | null
+          last_name?: string | null
+          primary_key?: string
+          role?: Database["public"]["Enums"]["role"]
+          telephone_number?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_primary_key_fkey"
+            columns: ["primary_key"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       website_data: {
         Row: {
           name: string
