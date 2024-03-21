@@ -5,11 +5,15 @@
 import { type Handler, serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@latest";
 import { corsHeaders, generateCorsOptionsForJsonResponse } from "../_shared/cors.ts";
+import { logError } from "@/logger/logger";
 
 interface CreateUserRequestBody {
     email: string;
     password: string;
     role: "admin" | "caller";
+    firstName: string;
+    lastName: string;
+    telephoneNumber: string;
 }
 
 serve(async (req: Handler): Promise<Response> => {
@@ -74,6 +78,19 @@ serve(async (req: Handler): Promise<Response> => {
             JSON.stringify({ error: error.message }),
             generateCorsOptionsForJsonResponse(error.status ?? 400)
         );
+    }
+
+    if (data) {
+        const { error } = await supabase.from("profiles").insert({
+            primary_key: data.user?.id,
+            role: requestBody.role,
+            first_name: requestBody.firstName,
+            last_name: requestBody.lastName,
+            telephone_number: requestBody.telephoneNumber,
+        });
+        if (error) {
+            void logError("Error with insert: Profiles - create user", error);
+        }
     }
 
     return new Response(JSON.stringify(data.user), generateCorsOptionsForJsonResponse(200));
