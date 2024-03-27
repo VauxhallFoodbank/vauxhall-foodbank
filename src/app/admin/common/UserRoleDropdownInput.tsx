@@ -16,6 +16,7 @@ interface Props {
 const UserRoleDropdownInput: React.FC<Props> = (props) => {
     return (
         <DropdownListInput
+            selectLabelId="user-role-select-label"
             listTitle="User Role"
             defaultValue={props.defaultValue}
             labelsAndValues={roleLabelsAndValues}

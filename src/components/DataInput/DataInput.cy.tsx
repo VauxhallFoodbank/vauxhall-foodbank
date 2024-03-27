@@ -24,6 +24,7 @@ describe("Data Input Components", () => {
         );
         cy.mount(
             <DropdownListInput
+                selectLabelId="select-label"
                 labelsAndValues={[
                     ["A", "a"],
                     ["B", "b"],
@@ -78,6 +79,7 @@ describe("Data Input Components", () => {
         cy.mount(<PasswordInput />);
         cy.mount(
             <DropdownListInput
+                selectLabelId="select-label"
                 labelsAndValues={[
                     ["A", "a"],
                     ["B", "b"],
@@ -212,6 +214,7 @@ describe("Data Input Components", () => {
 
             cy.mount(
                 <DropdownListInput
+                    selectLabelId="select-label"
                     labelsAndValues={[
                         ["A", "a"],
                         ["B", "b"],

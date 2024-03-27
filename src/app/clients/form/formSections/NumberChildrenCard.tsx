@@ -69,6 +69,7 @@ const NumberChildrenCard: React.FC<CardProps> = ({
                         <StyledCard key={child.primaryKey}>
                             <FormText>Child {index + 1}</FormText>
                             <DropdownListInput
+                                selectLabelId="children-gender-select-label"
                                 labelsAndValues={[
                                     ["Male", "male"],
                                     ["Female", "female"],
@@ -79,6 +80,7 @@ const NumberChildrenCard: React.FC<CardProps> = ({
                                 onChange={getChild(fieldSetter, fields.children, index, "gender")}
                             />
                             <DropdownListInput
+                                selectLabelId="children-age-select-label"
                                 labelsAndValues={[
                                     ["<1", "0"],
                                     ["1", "1"],

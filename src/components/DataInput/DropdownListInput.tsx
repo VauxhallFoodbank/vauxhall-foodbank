@@ -8,16 +8,17 @@ interface Props {
     listTitle?: string;
     defaultValue?: string;
     onChange?: (event: SelectChangeEvent) => void;
+    selectLabelId: string;
 }
 
 const DropdownListInput: React.FC<Props> = (props) => {
     return (
         <FormControl fullWidth>
-            <InputLabel>{props.listTitle}</InputLabel>
+            <InputLabel id={props.selectLabelId}>{props.listTitle}</InputLabel>
             <Select
                 defaultValue={props.defaultValue ?? ""}
-                label={props.listTitle}
                 onChange={props.onChange}
+                labelId={props.selectLabelId}
             >
                 {props.labelsAndValues.map(([label, value]) => {
                     return (
