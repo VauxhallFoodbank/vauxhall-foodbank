@@ -21,7 +21,7 @@ jobs:
 
       - name: Remove files irrelevant files that may cause TypeScript errors
         run:
-          rm -f ./seed.mts
+          rm -f supabase/seed/seed.mts
 
       - name: Run linting
         run: npm run lint

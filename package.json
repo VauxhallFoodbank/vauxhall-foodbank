@@ -28,7 +28,7 @@
     "dev:reset_supabase": "supabase db reset && npm run dev:create_admin_and_caller_users && npm run dev:create_bucket",
     "db:local:generate_types": "supabase gen types typescript --local --schema public > src/databaseTypesFile.ts",
     "db:remote:generate_types": "supabase gen types typescript --schema public > src/databaseTypesFile.ts",
-    "db:generate_seed": "npx tsx seed.mts > supabase/seed.sql"
+    "db:generate_seed": "npx tsx supabase/seed/seed.mts > supabase/seed.sql"
   },
   "nyc": {
     "all": true,
